@@ -14,64 +14,82 @@ use function PHPUnit\Framework\assertEquals;
 
         // Teste les lancers des boules de bowling
         public function testOneFrameEqual11() {
-            $frame  = $this->bowling->roll('1');
-            $frame .= $this->bowling->roll('1');
-            assertEquals('11', $frame);
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('1');
+            assertEquals('11', $roll);
         }
 
         public function testOneFrameOneMiss() {
-            $frame  = $this->bowling->roll('1');
-            $frame .= $this->bowling->roll('-');
-            assertEquals('1-', $frame);
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('-');
+            assertEquals('1-', $roll);
         }
 
         public function testOneFrameTwoMiss() {
-            $frame  = $this->bowling->roll('-');
-            $frame .= $this->bowling->roll('-');
-            assertEquals('--', $frame);
+            $roll  = $this->bowling->roll('-');
+            $roll .= $this->bowling->roll('-');
+            assertEquals('--', $roll);
         }
 
         public function testOneFrameWithSpare() {
-            $frame  = $this->bowling->roll('1');
-            $frame .= $this->bowling->roll('/');
-            assertEquals('1/', $frame);
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('/');
+            assertEquals('1/', $roll);
         }
 
         public function testOneFrameWithStrike() {
-            $frame  = $this->bowling->roll('X');
-            assertEquals('X', $frame);
+            $roll  = $this->bowling->roll('X');
+            assertEquals('X', $roll);
         }
 
 
-        // Teste le résultat de deux lancers
+        // Teste le résultat d'un frame (2 lancers)
         public function testResultFrame11() {
-            $frame  = $this->bowling->roll('1');
-            $frame .= $this->bowling->roll('1');
-            assertEquals(2, $this->bowling->result($frame));
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('1');
+            assertEquals(2, $this->bowling->result($roll));
         }
 
         public function testResultFrameOneMiss() {
-            $frame  = $this->bowling->roll('1');
-            $frame .= $this->bowling->roll('-');
-            assertEquals(1, $this->bowling->result($frame));
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('-');
+            assertEquals(1, $this->bowling->result($roll));
         }
 
         public function testResultFrameTwoMiss() {
-            $frame  = $this->bowling->roll('-');
-            $frame .= $this->bowling->roll('-');
-            assertEquals(0, $this->bowling->result($frame));
+            $roll  = $this->bowling->roll('-');
+            $roll .= $this->bowling->roll('-');
+            assertEquals(0, $this->bowling->result($roll));
         }
 
         public function testResultFrameWithSpare() {
-            $frame  = $this->bowling->roll('1');
-            $frame .= $this->bowling->roll('/');
-            assertEquals(10, $this->bowling->result($frame));
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('/');
+            assertEquals(10, $this->bowling->result($roll));
         } 
 
         public function testResultFrameWithStrike() {
-            $frame  = $this->bowling->roll('X');
-            assertEquals(10, $this->bowling->result($frame));
+            $roll  = $this->bowling->roll('X');
+            assertEquals(10, $this->bowling->result($roll));
         }
+
+
+        // Teste le résultat de plusieurs frame (2 lancers)
+        public function testResultFrame1111() {
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('1');
+            assertEquals(4, $this->bowling->result($roll));
+        }
+
+        public function testResultFramesWithSpare() {
+            $roll  = $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('/');
+            $roll .= $this->bowling->roll('1');
+            $roll .= $this->bowling->roll('1');
+            assertEquals(13, $this->bowling->result($roll));
+        } 
 
     }
 
