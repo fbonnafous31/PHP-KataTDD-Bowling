@@ -38,3 +38,6 @@ What makes this game interesting to score is the lookahead in the scoring for st
 Write some thoughts here about what you have learnt from this Kata. You don’t have to post all the code of your solution - I think the solution in itself is less interesting than the path you took to get there and what decisions you made. Just seeing the code won’t necessarily help me to reproduce it for myself. So in this section various people might go through the main parts of the problem and how they tackled them, what design ideas were discarded, and which order the test cases were implemented in.
 
     One interesting point to note is that without counting frames in any way (although I don’t think this was intended as a ‘hard’ requirement for the initial Kata completion), finding an elegant way to identify the end of the game/last “real” frame becomes difficult (ie: assuming there are final ‘bonus’ rolls included in a given test case). Update : After trying various things, including writing out a logic matrix for possible end-of-game combinations, I’m not sure it’s possible to detect whether a final ‘throw’ counts as bonus-only or as part of an actual frame, unless you’re counting frames. – RudyXDesjardins
+
+###Exemple de parties
+![Texte alternatif](/public/img/1648230886777.jpg "Titre de l'image").
