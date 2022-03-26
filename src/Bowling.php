@@ -10,18 +10,18 @@
 
         public function frame_result(string $frame): int {
             $score = 0;            
-            $frame0 = $this->load_value($frame[0]);
-            if (isset($frame[1])) $frame1 = $this->load_value($frame[1]);
-            if (isset($frame[2])) $frame2 = $this->load_value($frame[2]);
+            $ball1 = $this->load_value($frame[0]);
+            if (isset($frame[1])) $ball2 = $this->load_value($frame[1]);
+            if (isset($frame[2])) $ball3 = $this->load_value($frame[2]);
 
             if ($frame[0] === 'X') {
-                if ($frame[2] === '/') $score = 10 + $frame1 + ($frame2 - $frame1);
-                else $score = 10 + $frame1 + $frame2;
+                if ($frame[2] === '/') $score = 10 + $ball2 + ($ball3 - $ball2);
+                else $score = 10 + $ball2 + $ball3;
             } elseif ($frame[1] === '/') {
-                $score = 10 + $frame2;
+                $score = 10 + $ball3;
             } else {
-                $score += $frame0;   
-                $score += $frame1;   
+                $score += $ball1;   
+                $score += $ball2;   
             }
             return $score;
         }
@@ -33,7 +33,6 @@
             $i        = 0;
 
             foreach ($frames as $frame) {
-
                 // spare
                 if (isset($frame[1]) and ($frame[1] === '/')) {
                     if ($i+1<$nbframes) $frame .= $frames[$i+1][0];
@@ -52,7 +51,6 @@
 
                     } 
                 }
-
                 if ($frame != 'X') $result += $this->frame_result($frame);
                 $i++;
             }
