@@ -208,7 +208,7 @@ use function PHPUnit\Framework\assertEquals;
             $frame10  = $this->bowling->roll('2');
             $frame10 .= $this->bowling->roll('/');
             $frame10 .= $this->bowling->roll('8');
-        assertEquals(131, $this->bowling->game_result($frame1, $frame2, $frame3, $frame4, $frame5, $frame6, $frame7, $frame8, $frame9, $frame10));
+            assertEquals(131, $this->bowling->game_result($frame1, $frame2, $frame3, $frame4, $frame5, $frame6, $frame7, $frame8, $frame9, $frame10));
         }
 
         public function testGame2() {
@@ -255,7 +255,55 @@ use function PHPUnit\Framework\assertEquals;
             $frame10  = $this->bowling->roll('9');
             $frame10 .= $this->bowling->roll('/');
             $frame10 .= $this->bowling->roll('X');
-        assertEquals(127, $this->bowling->game_result($frame1, $frame2, $frame3, $frame4, $frame5, $frame6, $frame7, $frame8, $frame9, $frame10));
+            assertEquals(127, $this->bowling->game_result($frame1, $frame2, $frame3, $frame4, $frame5, $frame6, $frame7, $frame8, $frame9, $frame10));
+        }
+
+        public function testGameMathis() {
+            $frame1   = $this->bowling->roll('5');
+            $frame1  .= $this->bowling->roll('-');
+            $frame2   = $this->bowling->roll('6');
+            $frame2  .= $this->bowling->roll('-');
+            $frame3   = $this->bowling->roll('4');
+            $frame3  .= $this->bowling->roll('3');
+            $frame4   = $this->bowling->roll('6');
+            $frame4  .= $this->bowling->roll('1');
+            $frame5   = $this->bowling->roll('7');
+            $frame5  .= $this->bowling->roll('1');
+            $frame6   = $this->bowling->roll('5');
+            $frame6  .= $this->bowling->roll('3');
+            $frame7   = $this->bowling->roll('9');
+            $frame7  .= $this->bowling->roll('-');
+            $frame8   = $this->bowling->roll('4');
+            $frame8  .= $this->bowling->roll('-');
+            $frame9   = $this->bowling->roll('6');
+            $frame9  .= $this->bowling->roll('-');
+            $frame10  = $this->bowling->roll('8');
+            $frame10 .= $this->bowling->roll('-');
+            assertEquals(68, $this->bowling->game_result($frame1, $frame2, $frame3, $frame4, $frame5, $frame6, $frame7, $frame8, $frame9, $frame10));
+        }
+
+        public function testGameLydie() {
+            $frame1   = $this->bowling->roll('-');
+            $frame1  .= $this->bowling->roll('8');
+            $frame2   = $this->bowling->roll('1');
+            $frame2  .= $this->bowling->roll('6');
+            $frame3   = $this->bowling->roll('-');
+            $frame3  .= $this->bowling->roll('6');
+            $frame4   = $this->bowling->roll('9');
+            $frame4  .= $this->bowling->roll('/');
+            $frame5   = $this->bowling->roll('3');
+            $frame5  .= $this->bowling->roll('-');
+            $frame6   = $this->bowling->roll('1');
+            $frame6  .= $this->bowling->roll('-');
+            $frame7   = $this->bowling->roll('-');
+            $frame7  .= $this->bowling->roll('3');
+            $frame8   = $this->bowling->roll('7');
+            $frame8  .= $this->bowling->roll('/');
+            $frame9   = $this->bowling->roll('6');
+            $frame9  .= $this->bowling->roll('-');
+            $frame10  = $this->bowling->roll('-');
+            $frame10 .= $this->bowling->roll('7');
+            assertEquals(70, $this->bowling->game_result($frame1, $frame2, $frame3, $frame4, $frame5, $frame6, $frame7, $frame8, $frame9, $frame10));
         }
 
     }

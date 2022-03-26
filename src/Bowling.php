@@ -9,32 +9,19 @@
         }
 
         public function frame_result(string $frame): int {
-            $score = 0;
-            
-            $frame0 = $frame[0];
-            if ($frame[0] === '-') $frame0 = 0;
-            if ($frame[0] === '/') $frame0 = 10;
-            if ($frame[0] === 'X') $frame0 = 10;
-
-            $frame1 = 0;
-            if (isset($frame[1])) $frame1 = $frame[1];
-            if ((isset($frame[1])) and ($frame[1] === '-')) $frame1 = 0;
-            if ((isset($frame[1])) and ($frame[1] === '/')) $frame1 = 10;
-            if ((isset($frame[1])) and ($frame[1] === 'X')) $frame1 = 10;
-
-            $frame2 = 0;
-            if (isset($frame[2])) $frame2 = $frame[2];
-            if ((isset($frame[2])) and ($frame[2] === '-')) $frame2 = 0;
-            if ((isset($frame[2])) and ($frame[2] === '/')) $frame2 = 10;
-            if ((isset($frame[2])) and ($frame[2] === 'X')) $frame2 = 10;
+            $score = 0;            
+            $frame0 = $this->load_value($frame[0]);
+            if (isset($frame[1])) $frame1 = $this->load_value($frame[1]);
+            if (isset($frame[2])) $frame2 = $this->load_value($frame[2]);
 
             if ($frame[0] === 'X') {
-                $score = 10 + $frame1 + $frame2;
+                if ($frame[2] === '/') $score = 10 + $frame1 + ($frame2 - $frame1);
+                else $score = 10 + $frame1 + $frame2;
             } elseif ($frame[1] === '/') {
                 $score = 10 + $frame2;
             } else {
-                $score += intval($frame0);   
-                $score += intval($frame1);   
+                $score += $frame0;   
+                $score += $frame1;   
             }
             return $score;
         }
@@ -47,10 +34,12 @@
 
             foreach ($frames as $frame) {
 
+                // spare
                 if (isset($frame[1]) and ($frame[1] === '/')) {
                     if ($i+1<$nbframes) $frame .= $frames[$i+1][0];
                 }
 
+                // strike
                 if ($i+2<$nbframes) {
                     if ($frame[0] === 'X') {
                         if ($frames[$i+1][0] === 'X') {
@@ -68,9 +57,19 @@
                 $i++;
             }
 
+            // extra ball
             if ((isset($frames[9][2])) and ($frames[9][2] === 'X')) $result += 20;
 
             return $result;
+        }
+
+        private function load_value (string $value): int {
+            $new_value = $value;
+            if ($value === '-') $new_value = 0;
+            if ($value === '/') $new_value = 10;
+            if ($value === 'X') $new_value = 10;
+
+            return $new_value;
         }
 
     }
